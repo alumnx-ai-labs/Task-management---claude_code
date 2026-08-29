@@ -49,3 +49,10 @@ def test_create_task_ids_are_distinct(client):
     second = client.post("/api/tasks", json={"title": "Task B"}).json()
 
     assert first["id"] != second["id"]
+
+
+def test_create_task_with_backlog_status_succeeds(client):
+    response = client.post("/api/tasks", json={"title": "Someday idea", "status": "backlog"})
+
+    assert response.status_code == 201
+    assert response.json()["status"] == "backlog"
