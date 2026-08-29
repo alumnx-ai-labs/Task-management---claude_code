@@ -78,4 +78,39 @@ describe('useDragAndDrop', () => {
     expect(setTasks).not.toHaveBeenCalled()
     expect(api.updateTask).not.toHaveBeenCalled()
   })
+
+  it('resolves a drop on the backlog column schedule area to status: backlog', async () => {
+    const task = { id: 't1', title: 'A', status: 'todo', scheduled_at: null }
+    api.updateTask.mockResolvedValue({ ...task, status: 'backlog' })
+    const { result } = setup([task])
+
+    await act(async () => {
+      result.current.handleDragEnd({
+        active: { id: 't1' },
+        over: { id: 'column-schedule:backlog' },
+      })
+      await Promise.resolve()
+    })
+
+    expect(api.updateTask).toHaveBeenCalledWith(
+      't1',
+      expect.objectContaining({ status: 'backlog' }),
+    )
+  })
+
+  it('resolves a drop on the backlog column unscheduled area to status: backlog, scheduled_at: null', async () => {
+    const task = { id: 't1', title: 'A', status: 'todo', scheduled_at: '2026-09-03T14:30:00Z' }
+    api.updateTask.mockResolvedValue({ ...task, status: 'backlog', scheduled_at: null })
+    const { result } = setup([task])
+
+    await act(async () => {
+      result.current.handleDragEnd({
+        active: { id: 't1' },
+        over: { id: 'column-unscheduled:backlog' },
+      })
+      await Promise.resolve()
+    })
+
+    expect(api.updateTask).toHaveBeenCalledWith('t1', { status: 'backlog', scheduled_at: null })
+  })
 })

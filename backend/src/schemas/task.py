@@ -3,7 +3,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, field_validator
 
-Status = Literal["todo", "in_progress", "done"]
+Status = Literal["backlog", "todo", "in_progress", "done"]
 
 
 def _validate_title(v: str) -> str:

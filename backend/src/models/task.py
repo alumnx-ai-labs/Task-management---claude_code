@@ -7,7 +7,7 @@ from sqlalchemy.types import TypeDecorator
 
 from src.db import Base
 
-STATUSES = ("todo", "in_progress", "done")
+STATUSES = ("backlog", "todo", "in_progress", "done")
 
 
 def _utcnow() -> datetime:

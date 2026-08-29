@@ -9,6 +9,7 @@
   --danger-bg: #fdecea;
   --danger-border: #f5c2c0;
   --danger-text: #b42318;
+  --backlog: #9333ea;
   --todo: #64748b;
   --in-progress: #2563eb;
   --done: #16a34a;
@@ -143,6 +144,10 @@ form button + button {
   margin: 0 0 10px;
   padding-bottom: 8px;
   border-bottom: 3px solid var(--todo);
+}
+
+.task-board section[data-status='backlog'] > h2 {
+  border-bottom-color: var(--backlog);
 }
 
 .task-board section[data-status='in_progress'] > h2 {
