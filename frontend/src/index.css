@@ -1,0 +1,227 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --border: #d7dbe0;
+  --text: #1f2933;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --danger-bg: #fdecea;
+  --danger-border: #f5c2c0;
+  --danger-text: #b42318;
+  --todo: #64748b;
+  --in-progress: #2563eb;
+  --done: #16a34a;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+/* Error banner */
+[role='alert'] {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger-text);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+[role='alert'] button {
+  background: none;
+  border: 1px solid var(--danger-text);
+  color: var(--danger-text);
+}
+
+/* Task form */
+form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: grid;
+  gap: 12px;
+  max-width: 480px;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 14px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button[type='button'] {
+  background: var(--surface);
+  color: var(--accent);
+}
+
+form > div + button,
+form button + button {
+  justify-self: start;
+}
+
+/* Board */
+.task-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.task-board section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 120px;
+}
+
+.task-board section > h2 {
+  font-size: 1rem;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid var(--todo);
+}
+
+.task-board section[data-status='in_progress'] > h2 {
+  border-bottom-color: var(--in-progress);
+}
+
+.task-board section[data-status='done'] > h2 {
+  border-bottom-color: var(--done);
+}
+
+.task-board h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 12px 0 6px;
+}
+
+.drop-zone {
+  min-height: 48px;
+  border-radius: 8px;
+}
+
+.drop-zone[data-over='true'] {
+  background: rgba(37, 99, 235, 0.08);
+  outline: 2px dashed var(--accent);
+  outline-offset: -2px;
+}
+
+.drop-zone-hint {
+  margin: 0;
+  padding: 12px 4px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+
+/* Task card */
+article {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  cursor: grab;
+  touch-action: none;
+}
+
+article:active {
+  cursor: grabbing;
+}
+
+article h3 {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text);
+}
+
+article p {
+  margin: 0 0 6px;
+  font-size: 0.85rem;
+}
+
+article [data-testid='scheduled-at'] {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+article div {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+article button {
+  padding: 4px 10px;
+  font-size: 0.78rem;
+}
